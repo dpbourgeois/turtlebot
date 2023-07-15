@@ -36,15 +36,15 @@ class VoiceControl():
         while not rospy.is_shutdown():
 
             speech = getSpeech()
-            if speech = 'go':
+            if speech == 'go':
                 move_cmd.linear.x = checkLinearLimitVelocity(move_cmd.linear.x + 0.01)
-            elif speech = 'back':
+            elif speech == 'back':
                 move_cmd.linear.x = checkLinearLimitVelocity(move_cmd.linear.x - 0.01)
-            elif speech = 'left':
+            elif speech == 'left':
                 move_cmd.angular.z = checkAngularLimitVelocity(move_cmd.angular.z + 0.1)
-            elif speech = 'right':
+            elif speech == 'right':
                 move_cmd.angular.z = checkAngularLimitVelocity(move_cmd.angular.z - 0.01)
-            elif speech = 'stop':
+            elif speech == 'stop':
                 move_cmd.linear.x = 0.0
                 move_cmd.angular.z = 0.0
     	    
