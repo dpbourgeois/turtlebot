@@ -30,8 +30,9 @@ class VoiceControl():
 
     	# as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
-
+	    print('flag1')
             speech = getSpeech()
+	    print('flag2')
             if speech == 'go':
                 move_cmd.linear.x = checkLinearLimitVelocity(move_cmd.linear.x + 0.01)
             elif speech == 'back':
@@ -88,6 +89,7 @@ class VoiceControl():
  
 if __name__ == '__main__':
     try:
+	print('flag1')
         VoiceControl()
     except:
         rospy.loginfo("VoiceControl node terminated.")
