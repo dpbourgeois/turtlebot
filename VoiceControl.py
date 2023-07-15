@@ -1,5 +1,5 @@
 import rospy
-import speech_recogntion as sr
+import speech_recognition as sr
 from geometry_msgs.msg import Twist
 
 class VoiceControl():
