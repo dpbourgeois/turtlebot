@@ -77,11 +77,11 @@ class VoiceControl():
     def checkLinearLimitVelocity(vel):
         vel = constrain(vel, -0.22, 0.22)
         return vel
-
-     def checkAngularLimitVelocity(vel):
+    
+    def checkAngularLimitVelocity(vel):
         vel = constrain(vel, -2.84, 2.84)
         return vel
-
+        
     def shutdown(self):
         # stop turtlebot
         rospy.loginfo("Stop TurtleBot")
