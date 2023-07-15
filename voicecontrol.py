@@ -51,6 +51,7 @@ class VoiceControl():
             rate.sleep()
                    
     def getSpeech():
+	r = sr.Recognizer()
         with sr.Microphone() as source:
             speech = ''                
             audio = r.listen(source)                   
