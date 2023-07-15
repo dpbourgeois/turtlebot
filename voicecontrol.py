@@ -8,11 +8,7 @@ class VoiceControl():
         rospy.init_node('VoiceControl', anonymous=False)
 
     	# tell user how to stop TurtleBot
-    	rospy.loginfo("""
-            -End program: CTRL + C
-            -Move Forward/Backward: Go/Back
-            -Turn Left/Right: Left/Right
-            -Force Stop: Stop""")
+    	rospy.loginfo("To stop TurtleBot CTRL + C")
 
         # What function to call when you ctrl + c    
         rospy.on_shutdown(self.shutdown)
