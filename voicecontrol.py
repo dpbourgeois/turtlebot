@@ -3,6 +3,36 @@ import speech_recognition as sr
 from geometry_msgs.msg import Twist
 
 class VoiceControl():
+    def getSpeech():
+	r = sr.Recognizer()
+        with sr.Microphone() as source:
+            speech = ''                
+            audio = r.listen(source)
+            try:
+                speech = r.recognize(audio)
+		speech = speech.lower()   
+            except LookupError:
+                speech = ''
+            return speech
+
+    def constrain(input, low, high):
+        if input < low:
+          input = low
+        elif input > high:
+          input = high
+        else:
+          input = input
+
+        return input
+
+    def checkLinearLimitVelocity(vel):
+        vel = constrain(vel, -0.22, 0.22)
+        return vel
+    
+    def checkAngularLimitVelocity(vel):
+        vel = constrain(vel, -2.84, 2.84)
+        return vel
+	    
     def __init__(self):
         # initiliaze
         rospy.init_node('VoiceControl', anonymous=False)
@@ -53,36 +83,6 @@ class VoiceControl():
     	    # wait for 0.1 seconds (10 HZ) and publish again
             rate.sleep()
                    
-    def getSpeech():
-	r = sr.Recognizer()
-        with sr.Microphone() as source:
-            speech = ''                
-            audio = r.listen(source)
-            try:
-                speech = r.recognize(audio)
-		speech = speech.lower()   
-            except LookupError:
-                speech = ''
-            return speech
-
-    def constrain(input, low, high):
-        if input < low:
-          input = low
-        elif input > high:
-          input = high
-        else:
-          input = input
-
-        return input
-
-    def checkLinearLimitVelocity(vel):
-        vel = constrain(vel, -0.22, 0.22)
-        return vel
-    
-    def checkAngularLimitVelocity(vel):
-        vel = constrain(vel, -2.84, 2.84)
-        return vel
-        
     def shutdown(self):
         # stop turtlebot
         rospy.loginfo("Stop TurtleBot")
