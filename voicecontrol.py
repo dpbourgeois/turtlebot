@@ -31,7 +31,10 @@ class VoiceControl():
     	# as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
 	    print('flag1')
-            speech = getSpeech()
+	    try:
+                speech = getSpeech()
+	    except NameError:
+		    print('got it')
 	    print('flag7')
             if speech == 'go':
                 move_cmd.linear.x = checkLinearLimitVelocity(move_cmd.linear.x + 0.01)
@@ -51,20 +54,14 @@ class VoiceControl():
             rate.sleep()
                    
     def getSpeech():
-	print('flag2')
 	r = sr.Recognizer()
-	print('flag3')
         with sr.Microphone() as source:
-	    print('flag4')
             speech = ''                
             audio = r.listen(source)
-	    print('flag5')
             try:
                 speech = r.recognize(audio)
-                print('flag6.1')
 		speech = speech.lower()   
             except LookupError:
-		print('flag6.2')
                 speech = ''
             return speech
 
