@@ -76,11 +76,11 @@ class VoiceControl():
 
     def checkLinearLimitVelocity(vel):
         vel = constrain(vel, -0.22, 0.22)
-        reurn vel
+        return vel
 
      def checkAngularLimitVelocity(vel):
         vel = constrain(vel, -2.84, 2.84)
-        reurn vel
+        return vel
 
     def shutdown(self):
         # stop turtlebot
