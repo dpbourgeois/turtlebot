@@ -57,27 +57,18 @@ def getKey():
     return key
 
 def getSpeech():
-    if os.name == 'nt':
-        timeout = 0.1
-        startTime = time.time()
-        while(1):
-            if msvcrt.kbhit():
-                if sys.version_info[0] >= 3:
-                    return msvcrt.getch().decode()
-                else:
-                    return msvcrt.getch()
-            elif time.time() - startTime > timeout:
-                return ''
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        r.adjust_for_ambient_noise(source, duration = 0.2)
         audio = r.listen(source)
         try:
-            speech = r.recognize_google(audio)
+            speech = r.recognize(audio)
             speech = speech.lower()
+            print('command:  ' + speech)
         except LookupError:
             speech = ''
-    return speech
+            print('could not understand audio')
+        finally:
+            return speech
 
 
 def vels(target_linear_vel, target_angular_vel):
