@@ -141,8 +141,11 @@ if __name__=="__main__":
     try:
         print(msg)
         while not rospy.is_shutdown():
+            print('flag1')
             key = getKey()
+            print('flag2')
             speech = getSpeech()
+            print('flag3')
             if speech == 'go' :
                 target_linear_vel = checkLinearLimitVelocity(target_linear_vel + LIN_VEL_STEP_SIZE)
                 status = status + 1
