@@ -13,8 +13,8 @@ BURGER_MAX_ANG_VEL = 2.84
 WAFFLE_MAX_LIN_VEL = 0.26
 WAFFLE_MAX_ANG_VEL = 1.82
 
-LIN_VEL_STEP_SIZE = 0.01
-ANG_VEL_STEP_SIZE = 0.1
+LIN_VEL_STEP_SIZE = 0.03
+ANG_VEL_STEP_SIZE = 0.07
 
 msg = """
 Control Your TurtleBot3!
@@ -132,11 +132,8 @@ if __name__=="__main__":
     try:
         print(msg)
         while not rospy.is_shutdown():
-            print('flag1')
             key = getKey()
-            print('flag2')
             speech = getSpeech()
-            print('flag3')
             if speech == 'go' :
                 target_linear_vel = checkLinearLimitVelocity(target_linear_vel + LIN_VEL_STEP_SIZE)
                 status = status + 1
